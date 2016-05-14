@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ThoughtWorks</title>
+        <link href="css/Bootstrap.css" media="screen" rel="stylesheet" />
+        <link href="css/jquery-ui.css" media="screen" rel="stylesheet" />
+        <link href="css/style.css" media="screen" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="row">
+            <h4 class="header">Your Trip Our Deals</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Flight</div>
+                    <div class="panel-body">
+                        <form id="flighSearch">
+                            <div class="form-group">
+                                <ul class="flight-options">
+                                    <li>
+                                        <input type="radio" name="flighoption" class="radiogroup" value="1"  /><label for="oneway"> One Way</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="flighoption" class="radiogroup" value="2" checked /><label for="twoway"> Round Trip</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ocity" name="ocity" placeholder="Enter origin city" value="BLR">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="dcity" name="dcity" placeholder="Enter destination city" value="BOM">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ddate" name="ddate" placeholder="Departure date" readonly>
+                            </div>
+
+                            <div class="form-group" id="returnDate">
+                                <input type="text" class="form-control" id="rdate" name="rdate" placeholder="Return date" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                  <select class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="3+">3+</option>
+                                </select>
+                            </div>
+
+                          <button type="submit" class="btn btn-default">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <p id="slider-range-display" class="hide">
+                    <label for="amount">Price range:</label>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider-range" class="hide"></div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="display_ads">
+                    <ul>
+                        <li>
+                            <a href="javascript:;"><img src="images/548x332-adventure-2042016.jpg" width="360" height="218"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;"><img  src="images/western-ghats-summer-6may.jpg" width="360" height="218"><span class="small_deal_background">10 Places in the Western Ghats You Must Visit This Summer</span></a>
+                        </li>
+                    </ul>
+
+                <a href="#">
+                    <img alt="#" src="images/places-to-visit-holidays-6may.jpg" style="display: inline;">
+                    <span class="deal_background">5 Destinations from Across the World You Ought to Explore in May  </span>
+                </a>
+                
+                </div>
+                    
+                <div class="panel panel-info hide">
+                    <div class="panel-heading">Flight Result</div>                   
+                    <div id="panel-flight"></div>
+                    
+                    
+                </div>
+            </div>
+            <div class="row content">
+                <div class="rewardsUpsellWrapperBlock">
+                <div class="rewardsBanner"><img src="images/survey_reward_giftbox1.jpg" width="258"></div>
+                <div class="upsellContainer">
+                    <h4>XXXXZXXX SSDD XXXXXX AAAA FFFF<br>
+                    <small>xxxx yyyyy xxxxx yyyyy  <a href="javascript:;">Know more</a></small></h4>	
+                </div>
+                </div>
+            </div>
+        </div>
+        <script type="application/javascript" src="scripts/jquery-2.2.3.min.js"></script>
+        <script type="application/javascript" src="scripts/jquery-ui.js"></script>
+        <script type="application/javascript" src="scripts/jquery.tmpl.min.js"></script>
+        <script type="application/javascript" src="scripts/flight-result.js"></script>
+        <script id="flightTemplate" type="text/x-jquery-tmpl">
+        {{each(prop, val) departureFlights}}
+            <article class="flight-result" id="block_${prop}">
+                <div class="flight-result-info">
+                    <ul class="flight-listing" id="onewaydata">
+                        <li>
+                            <i class="AirlinesLogo size-28 x${departureFlights[prop].le[0].cc}" title="Indigo"></i>
+                            <br>
+                            <small class="ltr-gray fs-10">${departureFlights[prop].le[0].cc} - ${departureFlights[prop].le[0].fn}</small>
+                        </li>
+                        <li class="flight-timing">
+                            <div class="start-time">
+                                <span class="start-time-color">${$item.dateFormatter(departureFlights[prop].le[0].dt, "t")}</span>
+                                <small class="fs-10 ltr-gray">${$item.dateFormatter(departureFlights[prop].le[0].dt, "d")}</small>
+                            </div>
+
+                            <div class="end-time">
+                                <span class="end-time-color">${$item.dateFormatter(departureFlights[prop].le[0].at, "t")}</span>
+                                <small class="fs-10 ltr-gray">${$item.dateFormatter(departureFlights[prop].le[0].at, "d")}</small>
+                            </div>
+                            <div class="total-time">
+                                <span class="total-time-color">${departureFlights[prop].td}</span>
+                                <small class="fs-10 ltr-gray">Non Stop</small>
+                            </div>
+                            <div class="to-form">
+                                <span class="total-time-color">${departureFlights[prop].le[0].d} to ${departureFlights[prop].le[0].o}</span>
+                            </div>
+                            <div class="price"><span class="INR">Rs.</span>${departureFlights[prop].af}</div>
+                        </li>
+                    </ul>
+                    {{if returnFlights && foption == "2"}}
+                    <ul class="flight-listing" id="twowaydata">
+                        <li>
+                            <i class="AirlinesLogo size-28 x${returnFlights[prop].le[0].cc}" title="Indigo"></i>
+                            <br>
+                            <small class="ltr-gray fs-10">${returnFlights[prop].le[0].cc} - ${returnFlights[prop].le[0].fn}</small>
+                        </li>
+                        <li class="flight-timing">
+                            <div class="start-time">
+                                <span class="start-time-color">${$item.dateFormatter(returnFlights[prop].le[0].dt, "t")}</span>
+                                <small class="fs-10 ltr-gray">${$item.dateFormatter(returnFlights[prop].le[0].dt, "d")}</small>
+                            </div>
+
+                            <div class="end-time">
+                                <span class="end-time-color">${$item.dateFormatter(returnFlights[prop].le[0].at, "t")}</span>
+                                <small class="fs-10 ltr-gray">${$item.dateFormatter(returnFlights[prop].le[0].at, "d")}</small>
+                            </div>
+                            <div class="total-time">
+                                <span class="total-time-color">${returnFlights[prop].td}</span>
+                                <small class="fs-10 ltr-gray">Non Stop</small>
+                            </div>
+                            <div class="to-form">
+                                <span class="total-time-color">${returnFlights[prop].le[0].d} to ${returnFlights[prop].le[0].o}</span>
+                            </div>
+                            <div class="price"><span class="INR">Rs.</span>${returnFlights[prop].af}</div>
+                        </li>
+                    </ul>
+                    {{/if}}
+                </div>
+                <div class="flight-book {{if foption == "1"}}one-way{{/if}}"><button class="btn-primary-red">Book this Flight</button></div>
+            </article>
+            {{/each}}
+        </script>
+    </body>
+</html>
